@@ -342,8 +342,9 @@ def test_download_remote_layers_api(
 
     client = env.pageserver.http_client()
 
-    tenant_id = endpoint.safe_psql("show neon.tenant_id")[0][0]
-    timeline_id = endpoint.safe_psql("show neon.timeline_id")[0][0]
+    tenant_id = env.initial_tenant
+    timeline_id = env.initial_timeline
+    assert timeline_id is not None
 
     table_len = 10000
     with endpoint.cursor() as cur:
